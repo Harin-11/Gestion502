@@ -48,7 +48,7 @@ public class DashboardActivity extends AppCompatActivity {
         if (currentUser != null) {
             String uid = currentUser.getUid();
             String correo = currentUser.getEmail();
-            if (correo != null) {
+            if (correo != null && tvUsuarioInfo != null) {
                 tvUsuarioInfo.setText(correo);
             }
 
@@ -59,7 +59,7 @@ public class DashboardActivity extends AppCompatActivity {
                     if (snapshot.exists()) {
                         String nombres = snapshot.child("nombres").getValue(String.class);
                         String apellidos = snapshot.child("apellidos").getValue(String.class);
-                        if (nombres != null) {
+                        if (nombres != null && tvBienvenida != null) {
                             String nombreCompleto = nombres + (apellidos != null ? " " + apellidos : "");
                             tvBienvenida.setText("¡Hola, " + nombreCompleto + "!");
                         }
@@ -72,16 +72,28 @@ public class DashboardActivity extends AppCompatActivity {
             });
         }
 
-        btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                firebaseAuth.signOut();
-                Toast.makeText(DashboardActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
+        if (btnCerrarSesion != null) {
+            btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    firebaseAuth.signOut();
+                    Toast.makeText(DashboardActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+
+        Button btnDesarrollador = findViewById(R.id.btnDesarrollador);
+        if (btnDesarrollador != null) {
+            btnDesarrollador.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(DashboardActivity.this, "Desarrollado por: Jack Tejada", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

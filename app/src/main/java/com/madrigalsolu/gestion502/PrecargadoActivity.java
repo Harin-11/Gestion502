@@ -11,6 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class PrecargadoActivity extends AppCompatActivity {
 
     @Override
@@ -26,7 +29,12 @@ public class PrecargadoActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(PrecargadoActivity.this, MainActivity.class));
+                FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
+                if (usuarioActual != null) {
+                    startActivity(new Intent(PrecargadoActivity.this, DashboardActivity.class));
+                } else {
+                    startActivity(new Intent(PrecargadoActivity.this, MainActivity.class));
+                }
                 finish();
             }
         },5000);

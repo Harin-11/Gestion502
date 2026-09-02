@@ -3,6 +3,7 @@
     <string name="app_name">Gestion502</string>
     <string name="developer">Jack Tejada</string>
     <string name="desarrollo">Desarrollado Por : </string>
+    <string name="desarrollador_info">Desarrollado Por : Jack Tejada</string>
     <string name="version">Version 1.0.0 </string>
     <!--LOGIN-->
     <string name="tìtulo_Login">Ingrese Session</string>
@@ -27,6 +28,17 @@
     <string name="txt_confirmar_password1">Contraseña</string>
     <string name="btn_registrar">Registrar</string>
     <string name="lbl_ir_login">Volver a Ingreso</string>
+
+    <!-- DASHBOARD -->
+    <string name="bienvenido">Bienvenido</string>
+    <string name="usuario_nombre">Usuario Nombre:</string>
+    <string name="empresa">Empresa</string>
+    <string name="gastos">Gastos</string>
+    <string name="tareas">Tareas</string>
+    <string name="lista_tareas">Lista Tareas</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="mis_datos">Mis datos</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
 
 
 </resources>
