@@ -20,8 +20,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -111,7 +116,19 @@ public class RegistroActivity2 extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Toast.makeText(RegistroActivity2.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        String mensajeError;
+                        if (e instanceof FirebaseAuthUserCollisionException) {
+                            mensajeError = "Este correo electrónico ya se encuentra registrado";
+                        } else if (e instanceof FirebaseAuthWeakPasswordException) {
+                            mensajeError = "La contraseña es muy débil. Debe tener al menos 8 caracteres";
+                        } else if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                            mensajeError = "El formato del correo electrónico no es válido";
+                        } else if (e instanceof FirebaseNetworkException) {
+                            mensajeError = "Sin conexión a internet. Verifica tu red";
+                        } else {
+                            mensajeError = "Error al crear la cuenta. Intenta de nuevo";
+                        }
+                        Toast.makeText(RegistroActivity2.this, mensajeError, Toast.LENGTH_LONG).show();
                     }
                 });
     }

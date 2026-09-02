@@ -34,7 +34,7 @@
 
                 <ImageView
                     android:id="@+id/ivDashboardLogo"
-                    android:layout_width="140dp"
+                    android:layout_width="213dp"
                     android:layout_height="45dp"
                     android:scaleType="fitStart"
                     app:srcCompat="@drawable/logo" />
@@ -79,7 +79,7 @@
             android:id="@+id/btnCerrarSesion"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="216dp"
             android:text="Cerrar Sesión"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -87,6 +87,7 @@
             app:backgroundTint="@color/colorPrimaryDark"
             app:cornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lottieDashboard" />
 

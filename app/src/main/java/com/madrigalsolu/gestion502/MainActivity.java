@@ -20,8 +20,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 public class MainActivity extends AppCompatActivity {
     TextView txt_registrar;
@@ -98,7 +102,56 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Toast.makeText(MainActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        String mensajeError;
+
+                        if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                            String errorCode = ((FirebaseAuthInvalidCredentialsException) e).getErrorCode();
+                            if ("ERROR_WRONG_PASSWORD".equals(errorCode)) {
+                                mensajeError = "Contraseña incorrecta";
+                            } else if ("ERROR_INVALID_EMAIL".equals(errorCode)) {
+                                mensajeError = "El formato del correo electrónico es inválido";
+                            } else {
+                                mensajeError = "Usuario incorrecto o contraseña incorrecta";
+                            }
+                        } else if (e instanceof FirebaseAuthInvalidUserException) {
+                            String errorCode = ((FirebaseAuthInvalidUserException) e).getErrorCode();
+                            if ("ERROR_USER_DISABLED".equals(errorCode)) {
+                                mensajeError = "Esta cuenta ha sido inhabilitada";
+                            } else {
+                                mensajeError = "El usuario no existe";
+                            }
+                        } else if (e instanceof FirebaseNetworkException) {
+                            mensajeError = "Sin conexión a internet. Verifica tu red";
+                        } else if (e instanceof FirebaseAuthException) {
+                            String errorCode = ((FirebaseAuthException) e).getErrorCode();
+                            if ("ERROR_WRONG_PASSWORD".equals(errorCode)) {
+                                mensajeError = "Contraseña incorrecta";
+                            } else if ("ERROR_USER_NOT_FOUND".equals(errorCode)) {
+                                mensajeError = "El usuario no existe";
+                            } else if ("ERROR_USER_DISABLED".equals(errorCode)) {
+                                mensajeError = "Esta cuenta ha sido inhabilitada";
+                            } else if ("ERROR_INVALID_EMAIL".equals(errorCode)) {
+                                mensajeError = "El formato del correo electrónico es inválido";
+                            } else if ("ERROR_TOO_MANY_REQUESTS".equals(errorCode)) {
+                                mensajeError = "Demasiados intentos fallidos. Intenta más tarde";
+                            } else {
+                                mensajeError = "Usuario incorrecto o contraseña incorrecta";
+                            }
+                        } else {
+                            String errorMsg = e.getMessage() != null ? e.getMessage().toLowerCase() : "";
+                            if (errorMsg.contains("invalid_login_credentials") ||
+                                    errorMsg.contains("invalid credential") ||
+                                    errorMsg.contains("invalid-credential") ||
+                                    errorMsg.contains("credentials")) {
+                                mensajeError = "Usuario incorrecto o contraseña incorrecta";
+                            } else if (errorMsg.contains("network")) {
+                                mensajeError = "Sin conexión a internet. Verifica tu red";
+                            } else {
+                                mensajeError = "Usuario incorrecto o contraseña incorrecta";
+                            }
+                        }
+
+                        Toast.makeText(MainActivity.this, mensajeError, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
