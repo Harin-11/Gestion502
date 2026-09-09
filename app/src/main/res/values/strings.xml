@@ -40,5 +40,40 @@
     <string name="mis_datos">Mis datos</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
 
+    <!-- Mis Datos  -->
+    <string name="correo_md">Correo_usuario</string>
+    <string name="codigo_md">Codigo Usuario</string>
+    <string name="titulo_md">Mis Datos</string>
+    <string name="datos_md">Datos:</string>
+    <string name="leyenda_md">Todos los campos son requeridos: Nombre, Apellidos, Teléfono</string>
+    <string name="nombre_md">Nombres</string>
+    <string name="apellido_md">apellidos</string>
+    <string name="fecha_nacimiento">Fecha Nacimiento</string>
+    <string name="edad_md">Edad</string>
+    <string name="telefono_md">Telefono</string>
+    <string name="domicilio_md">Domicilio</string>
+    <string name="tiktok_md">Tiktok</string>
+    <string name="profesion_md">Profesión</string>
+
+    <!--CREDENCIALES APLICATIVO-->
+    <string name="descripcion_dev">
+    Soy un programador con las siguientes habilidades y cualidades:
+    Poseo habilidades comunicativas.
+    Habilidad para trabajar en equipo y buscar soluciones eficientes.
+    Me organizao para poder planificar tareas y utilizar eficientemente mi tiempo.
+    Poseo la capacidad de planear, diseñar, evaluar, controlar, instalar, integrar,
+    construir, operar, administrar, y mantener sistemas que contemplen los sistemas
+    de software y todo lo relacionado con el ambiente computacional,
+    buscando el óptimo aprovechamiento.
+    </string>
+    <string name="telefono_dev">Telefono: 942332318</string>
+    <!--BOTNES GLOBALES-->
+    <string name="listar">Lista</string>
+    <string name="guardar">Guardar</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="buscar">Buscar</string>
+    <string name="volver">Volver</string>
+
 
 </resources>

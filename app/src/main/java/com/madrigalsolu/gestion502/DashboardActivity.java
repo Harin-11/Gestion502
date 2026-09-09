@@ -1,9 +1,14 @@
 package com.madrigalsolu.gestion502;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +41,8 @@ public class DashboardActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     DatabaseReference Usuarios;
+    Dialog dialogoDev;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,7 @@ public class DashboardActivity extends AppCompatActivity {
         cardTareas = findViewById(R.id.cardTareas);
         cardListaTareas = findViewById(R.id.cardListaTareas);
         cardMisDatos = findViewById(R.id.cardMisDatos);
+        dialogoDev=new Dialog(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -133,6 +141,7 @@ public class DashboardActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(DashboardActivity.this, "Desarrollado por: Jack Tejada", Toast.LENGTH_SHORT).show();
+                    desarrollador();
                 }
             });
         }
@@ -153,7 +162,55 @@ public class DashboardActivity extends AppCompatActivity {
             finish();
         }
     }
+    private void desarrollador(){
+        Button btnvolverdev;
+        ImageButton btntelefonodev, btnyoutubedev;
 
+        dialogoDev.setContentView(R.layout.dialogo_developer);
+
+        if (dialogoDev.getWindow() != null) {
+            dialogoDev.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+
+        btntelefonodev = dialogoDev.findViewById(R.id.btntelefonodev);
+        btnyoutubedev = dialogoDev.findViewById(R.id.btnyoutubedev);
+        btnvolverdev = dialogoDev.findViewById(R.id.btnvolverdev);
+
+        btntelefonodev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String numero = "942332318";
+                Uri uri = Uri.parse("tel:" + numero);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
+        btnyoutubedev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://www.youtube.com/watch?v=-9ZmP35jWFQ");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
+        btnvolverdev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogoDev.dismiss();
+            }
+        });
+
+        dialogoDev.show();
+        dialogoDev.setCanceledOnTouchOutside(false);
+
+        if (dialogoDev.getWindow() != null) {
+            int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
+            int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.82);
+            dialogoDev.getWindow().setLayout(width, height);
+        }
+    }
     private void cargarDatos() {
         if (firebaseUser == null) return;
 
@@ -193,3 +250,5 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 }
+
+
