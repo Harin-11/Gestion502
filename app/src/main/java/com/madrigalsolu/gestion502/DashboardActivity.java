@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,11 +22,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.madrigalsolu.gestion502.Empresa.EmpresaActivity;
+import com.madrigalsolu.gestion502.Favoritos.FavoritosActivity;
+import com.madrigalsolu.gestion502.Gastos.GastosActivity;
+import com.madrigalsolu.gestion502.Lista_Tareas.ListaTareaActivity;
+import com.madrigalsolu.gestion502.Mis_Datos.MisDatosActivity;
+import com.madrigalsolu.gestion502.Tareas.TareasActivity;
 
 public class DashboardActivity extends AppCompatActivity {
-    TextView tvBienvenida, tvUsuarioInfo;
-    Button btnCerrarSesion;
+    CardView cardEmpresa, cardGastos, cardListaTareas, cardFavoritos, cardMisDatos, cardTareas;
+    TextView tvBienvenida, tvUsuarioInfo, tvIdUsuario;
+    Button btnCerrarSesion, btnDesarrollador;
     FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+    DatabaseReference Usuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,37 +50,69 @@ public class DashboardActivity extends AppCompatActivity {
 
         tvBienvenida = findViewById(R.id.tvBienvenida);
         tvUsuarioInfo = findViewById(R.id.tvUsuarioInfo);
+        tvIdUsuario = findViewById(R.id.tvIdUsuario);
+
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+        btnDesarrollador = findViewById(R.id.btnDesarrollador);
+
+        cardEmpresa = findViewById(R.id.cardEmpresa);
+        cardGastos = findViewById(R.id.cardGastos);
+        cardFavoritos = findViewById(R.id.cardFavoritos);
+        cardTareas = findViewById(R.id.cardTareas);
+        cardListaTareas = findViewById(R.id.cardListaTareas);
+        cardMisDatos = findViewById(R.id.cardMisDatos);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        Usuarios = FirebaseDatabase.getInstance().getReference("Usuarios");
 
-        if (currentUser != null) {
-            String uid = currentUser.getUid();
-            String correo = currentUser.getEmail();
-            if (correo != null && tvUsuarioInfo != null) {
-                tvUsuarioInfo.setText(correo);
+        cardEmpresa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DashboardActivity.this, "Empresa", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DashboardActivity.this, EmpresaActivity.class));
             }
+        });
 
-            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Usuarios").child(uid);
-            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        String nombres = snapshot.child("nombres").getValue(String.class);
-                        String apellidos = snapshot.child("apellidos").getValue(String.class);
-                        if (nombres != null && tvBienvenida != null) {
-                            String nombreCompleto = nombres + (apellidos != null ? " " + apellidos : "");
-                            tvBienvenida.setText("¡Hola, " + nombreCompleto + "!");
-                        }
-                    }
-                }
+        cardGastos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DashboardActivity.this, "Gastos", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DashboardActivity.this, GastosActivity.class));
+            }
+        });
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
-        }
+        cardFavoritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DashboardActivity.this, "Favoritos", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DashboardActivity.this, FavoritosActivity.class));
+            }
+        });
+
+        cardTareas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DashboardActivity.this, "Tareas", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DashboardActivity.this, TareasActivity.class));
+            }
+        });
+
+        cardListaTareas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DashboardActivity.this, "Lista de Tareas", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DashboardActivity.this, ListaTareaActivity.class));
+            }
+        });
+
+        cardMisDatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DashboardActivity.this, "Mis Datos", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DashboardActivity.this, MisDatosActivity.class));
+            }
+        });
 
         if (btnCerrarSesion != null) {
             btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +128,6 @@ public class DashboardActivity extends AppCompatActivity {
             });
         }
 
-        Button btnDesarrollador = findViewById(R.id.btnDesarrollador);
         if (btnDesarrollador != null) {
             btnDesarrollador.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,5 +136,60 @@ public class DashboardActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        comprobarSesion();
+    }
+
+    private void comprobarSesion() {
+        firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            cargarDatos();
+        } else {
+            startActivity(new Intent(DashboardActivity.this, MainActivity.class));
+            finish();
+        }
+    }
+
+    private void cargarDatos() {
+        if (firebaseUser == null) return;
+
+        Usuarios.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String uid = "" + snapshot.child("uid").getValue();
+                    String nombres = "" + snapshot.child("nombres").getValue();
+                    String apellidos = "" + snapshot.child("apellidos").getValue();
+                    String correo = "" + snapshot.child("correo").getValue();
+
+                    String nombreCompleto = nombres;
+                    if (!apellidos.equals("null") && !apellidos.isEmpty()) {
+                        nombreCompleto += " " + apellidos;
+                    }
+
+                    if (tvBienvenida != null) {
+                        tvBienvenida.setText("¡Hola, " + nombreCompleto + "!");
+                    }
+                    if (tvUsuarioInfo != null) {
+                        if (!correo.equals("null") && !correo.isEmpty()) {
+                            tvUsuarioInfo.setText(correo);
+                        } else {
+                            tvUsuarioInfo.setText(nombreCompleto);
+                        }
+                    }
+                    if (tvIdUsuario != null) {
+                        tvIdUsuario.setText("ID: " + uid);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 }

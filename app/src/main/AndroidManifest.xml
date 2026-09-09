@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gestion502">
         <activity
+            android:name=".Tareas.TareasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Mis_Datos.MisDatosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Lista_Tareas.ListaTareaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Gastos.GastosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Favoritos.FavoritosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Empresa.EmpresaActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegistroActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
