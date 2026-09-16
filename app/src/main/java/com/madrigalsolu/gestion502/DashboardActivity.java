@@ -6,9 +6,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +20,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -37,6 +43,7 @@ import com.madrigalsolu.gestion502.Tareas.TareasActivity;
 public class DashboardActivity extends AppCompatActivity {
     CardView cardEmpresa, cardGastos, cardListaTareas, cardFavoritos, cardMisDatos, cardTareas;
     TextView tvBienvenida, tvUsuarioInfo, tvIdUsuario;
+    ImageView ivAvatar;
     Button btnCerrarSesion, btnDesarrollador;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -58,6 +65,16 @@ public class DashboardActivity extends AppCompatActivity {
         tvBienvenida = findViewById(R.id.tvBienvenida);
         tvUsuarioInfo = findViewById(R.id.tvUsuarioInfo);
         tvIdUsuario = findViewById(R.id.tvIdUsuario);
+        ivAvatar = findViewById(R.id.ivAvatar);
+
+        if (ivAvatar != null) {
+            ivAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(DashboardActivity.this, MisDatosActivity.class));
+                }
+            });
+        }
 
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
         btnDesarrollador = findViewById(R.id.btnDesarrollador);
@@ -240,6 +257,25 @@ public class DashboardActivity extends AppCompatActivity {
                     }
                     if (tvIdUsuario != null) {
                         tvIdUsuario.setText("ID: " + uid);
+                    }
+
+                    String imagenBase64 = "" + snapshot.child("imagen").getValue();
+                    if (imagenBase64.equals("null") || imagenBase64.isEmpty()) {
+                        imagenBase64 = "" + snapshot.child("imagen_usario").getValue();
+                    }
+                    if (!imagenBase64.equals("null") && !imagenBase64.isEmpty() && ivAvatar != null) {
+                        try {
+                            byte[] bytes = Base64.decode(imagenBase64, Base64.DEFAULT);
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            if (bitmap != null) {
+                                RoundedBitmapDrawable circularDrawable =
+                                        RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+                                circularDrawable.setCircular(true);
+                                ivAvatar.setImageDrawable(circularDrawable);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

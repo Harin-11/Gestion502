@@ -74,6 +74,12 @@
     <string name="eliminar">Eliminar</string>
     <string name="buscar">Buscar</string>
     <string name="volver">Volver</string>
+    <!--Editar foto-->
+    <string name="elegir_imagen">Elegir Imagen Desde</string>
+    <string name="actualizar_foto">Actualizar Foto</string>
+    <string name="galeria">Galería</string>
+    <string name="camara">Cámara</string>
+    <string name="seleccionar">Seleccionar</string>
 
 
 </resources>

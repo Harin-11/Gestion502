@@ -59,13 +59,24 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/ivAvatar"
-                android:layout_width="92dp"
-                android:layout_height="92dp"
+            <androidx.cardview.widget.CardView
+                android:layout_width="84dp"
+                android:layout_height="84dp"
                 android:layout_marginStart="8dp"
-                android:contentDescription="Avatar"
-                android:src="@drawable/bienv_1" />
+                android:layout_gravity="center_vertical"
+                app:cardCornerRadius="42dp"
+                app:cardElevation="3dp"
+                app:cardBackgroundColor="@color/white">
+
+                <ImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Avatar"
+                    android:src="@drawable/bienv_1" />
+
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

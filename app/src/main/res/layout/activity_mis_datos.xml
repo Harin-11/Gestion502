@@ -24,16 +24,26 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/amanecer" />
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="175dp"
-                android:src="@drawable/perfil" >
+                app:cardCornerRadius="70dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-            </ImageView>
+                <ImageView
+                    android:id="@+id/ivfotousuarioMD"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/perfil" />
+
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,158 +53,215 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:background="@drawable/bg_body"
+                android:orientation="vertical"
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/tvcorreoMD"                    android:layout_width="match_parent"
+                    android:id="@+id/tvcorreoMD"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/correo_md"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvcodigoMD"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/codigo_md"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/mis_datos"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:text="@string/mis_datos"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/datos_md"
-                    android:textColor="@color/design_default_color_primary_dark"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/bg_leyenda"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/leyenda_md"
                         android:gravity="center"
-                        android:padding="5dp"
-                        android:textSize="16sp"/>
+                        android:text="@string/leyenda_md"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
+                </LinearLayout>
 
-
-            </LinearLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:textColorHint="#555555"
+                    app:hintTextColor="@color/colorPrimaryDark">
+
                     <EditText
                         android:id="@+id/etnombresMD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/log_out"
                         android:hint="@string/nombre_md"
                         android:padding="15dp"
-                        android:drawableLeft="@drawable/log_out"/>
+                        android:textColor="@color/black"
+                        android:textColorHint="#555555" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:textColorHint="#555555"
+                    app:hintTextColor="@color/colorPrimaryDark">
+
                     <EditText
                         android:id="@+id/etapellidosMD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/log_out"
                         android:hint="@string/apellido_md"
                         android:padding="15dp"
-                        android:drawableLeft="@drawable/log_out"/>
+                        android:textColor="@color/black"
+                        android:textColorHint="#555555" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:textColorHint="#555555"
+                    app:hintTextColor="@color/colorPrimaryDark">
+
                     <EditText
                         android:id="@+id/etfechanacMD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/log_out"
                         android:hint="@string/fecha_nacimiento"
                         android:padding="15dp"
-                        android:drawableLeft="@drawable/log_out"/>
+                        android:textColor="@color/black"
+                        android:textColorHint="#555555" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:textColorHint="#555555"
+                    app:hintTextColor="@color/colorPrimaryDark">
+
                     <EditText
                         android:id="@+id/etedadMD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/log_out"
                         android:hint="@string/edad_md"
                         android:padding="15dp"
-                        android:drawableLeft="@drawable/log_out"/>
+                        android:textColor="@color/black"
+                        android:textColorHint="#555555" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:textColorHint="#555555"
+                    app:hintTextColor="@color/colorPrimaryDark">
+
                     <EditText
                         android:id="@+id/ettelefonoMD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/log_out"
                         android:hint="@string/telefono_md"
                         android:padding="15dp"
-                        android:drawableLeft="@drawable/log_out"/>
+                        android:textColor="@color/black"
+                        android:textColorHint="#555555" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:textColorHint="#555555"
+                    app:hintTextColor="@color/colorPrimaryDark">
+
                     <EditText
                         android:id="@+id/etdomicilioMD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/out"
                         android:hint="@string/domicilio_md"
                         android:padding="15dp"
-                        android:drawableLeft="@drawable/out"/>
+                        android:textColor="@color/black"
+                        android:textColorHint="#555555" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:textColorHint="#555555"
+                    app:hintTextColor="@color/colorPrimaryDark">
+
                     <EditText
                         android:id="@+id/ettikotokMD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/log_out"
                         android:hint="@string/tiktok_md"
                         android:padding="15dp"
-                        android:drawableLeft="@drawable/log_out"/>
+                        android:textColor="@color/black"
+                        android:textColorHint="#555555" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
+
         </LinearLayout>
-            <Button
-                android:id="@+id/btnguardarMD"
+
+        <Button
+            android:id="@+id/btnguardarMD"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Guardar"
-                android:layout_gravity="center"
-                android:drawableLeft="@drawable/log_out"/>
-
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:drawableLeft="@drawable/log_out"
+            android:text="Actualizar"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
