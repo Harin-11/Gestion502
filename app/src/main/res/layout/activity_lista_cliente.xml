@@ -8,15 +8,15 @@
     android:layout_height="match_parent"
     tools:context=".Clientes.ListaClienteActivity">
 
-    <TextView
-        android:id="@+id/tvListaVacia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="24dp"
-        android:text="Aún no hay clientes registrados. Presiona + para registrar uno."
-        android:textSize="18sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvListaVacia"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:gravity="center"-->
+<!--        android:padding="24dp"-->
+<!--        android:text="Aún no hay clientes registrados. Presiona + para registrar uno."-->
+<!--        android:textSize="18sp" />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnagregarcliente"
@@ -29,13 +29,10 @@
         android:src="@drawable/icono_agregar"
         app:shapeAppearance="@null"/>
 
-
-
-
-
-
-
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerviewClientes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
