@@ -116,14 +116,14 @@
                         <ImageView
                             android:layout_width="70dp"
                             android:layout_height="70dp"
-                            android:contentDescription="@string/empresa"
-                            android:src="@drawable/clientes_bi" />
+                            android:contentDescription="Clientes"
+                            android:src="@drawable/cliente" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="@string/empresa"
+                            android:text="Clientes"
                             android:textColor="#1566D6"
                             android:textSize="15sp"
                             android:textStyle="bold" />

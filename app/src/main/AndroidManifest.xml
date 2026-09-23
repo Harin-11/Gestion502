@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gestion502">
         <activity
+            android:name=".Clientes.AgregarClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Clientes.ListaClienteActivity"
+            android:exported="false" />
+        <activity
             android:name=".Mis_Datos.EditarFotoDatosActivity"
             android:exported="false" />
         <activity

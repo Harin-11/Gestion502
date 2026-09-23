@@ -80,6 +80,9 @@
     <string name="galeria">Galería</string>
     <string name="camara">Cámara</string>
     <string name="seleccionar">Seleccionar</string>
+    <!--cliente-->
+    <string name="registrar_cli">Registrar Cliente</string>
+    <string name="uid_usuario">Mi UID</string>q
 
 
 </resources>

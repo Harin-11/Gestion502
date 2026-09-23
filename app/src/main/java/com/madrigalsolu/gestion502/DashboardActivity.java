@@ -33,7 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.madrigalsolu.gestion502.Empresa.EmpresaActivity;
+import com.madrigalsolu.gestion502.Clientes.ListaClienteActivity;
 import com.madrigalsolu.gestion502.Favoritos.FavoritosActivity;
 import com.madrigalsolu.gestion502.Gastos.GastosActivity;
 import com.madrigalsolu.gestion502.Lista_Tareas.ListaTareaActivity;
@@ -94,8 +94,8 @@ public class DashboardActivity extends AppCompatActivity {
         cardEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(DashboardActivity.this, "Empresa", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(DashboardActivity.this, EmpresaActivity.class));
+                Toast.makeText(DashboardActivity.this, "Clientes", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DashboardActivity.this, ListaClienteActivity.class));
             }
         });
 
@@ -286,5 +286,4 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 }
-
 
